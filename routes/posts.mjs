@@ -33,10 +33,10 @@ router.get("/postsData", async (req, res) => {
     }
 })
 
-router.get("/postsData/:name", async (req, res) => {
+router.get("/postsData/:author", async (req, res) => {
     try {
-        const name = req.params.name
-        const data = await Post.find({name: name})
+        const author = req.params.author
+        const data = await Post.find({author: author})
 
         res.status(200).send({
             data: data
@@ -70,10 +70,10 @@ router.get("/posts", async (req, res) => {
 
 router.post("/posts", async (req, res) => {
     try {
-        const { name, title, content } = req.body
+        const { author, title, content } = req.body
 
         const post = await Post.create({
-            name: name,
+            author: author,
             title: title,
             content: content
         })
@@ -118,10 +118,10 @@ router.delete("/posts", async (req, res) => {
 
 router.put("/posts", async (req, res) => {
     try {
-        const { id, name, content, title } = req.body
+        const { id, author, content, title } = req.body
 
         await Post.findByIdAndUpdate(id, {
-            name: name,
+            author: author,
             title: title,
             content: content
         }, { new: true })

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema(
   {
-    name: {
+    author: {
       type: String,
       min: 3,
       max: 20,

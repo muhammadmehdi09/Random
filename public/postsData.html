@@ -23,12 +23,14 @@ const postDisplayer = (posts) => {
     document.body.innerHTML = ""
     for (const post of posts) {
         document.body.innerHTML += `<div class="bg-blue-300 text-white text-md text-semibold m-10 w-72 p-4 mx-auto rounded-xl">
-  <div>${post.name}</div>
-  <div>${post.title}</div>
-  <div>${post.content}</div>
+  <div>Author: ${post.author}</div>
+  <br>
+  <div>Title: ${post.title}</div>
+  <br>
+  <div>Content: ${post.content}</div>
   <div class="-mb-6 mt-4">
-    <button class="bg-green-500 rounded-xl px-8 py-3 mx-auto" id="${post._id}" onclick="editPost(this.id)">Edit</button>
-    <button class="bg-green-500 rounded-xl px-8 py-3 mx-auto" id="${post._id}" onclick="deletePost(this.id)">Delete post</button>
+    <button class="bg-green-500 rounded-xl px-6 py-3 mx-auto" id="${post._id}" onclick="editPost(this.id)">Edit Post</button>
+    <button class="bg-green-500 rounded-xl px-6 py-3 mx-auto" id="${post._id}" onclick="deletePost(this.id)">Delete Post</button>
   </div>
     <br>
 </div>`
@@ -51,13 +53,13 @@ async function deletePost(id) {
 }
 
 async function editPost(id) {
-    let name = prompt("Enter the new name")
+    let author = prompt("Enter the new author")
     let title = prompt("Enter the new title")
     let content = prompt("Enter the new content")
     const res = await fetch(`${baseUrl}/posts`, {
         method: "PUT",
         body: JSON.stringify({
-            name: name,
+            author: author,
             title: title,
             content: content,
             id: id,
